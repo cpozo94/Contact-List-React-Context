@@ -7,7 +7,7 @@ import "../../styles/demo.css";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
-	console.log("store",store)
+	
 
 	return (
 		<div className="container">
