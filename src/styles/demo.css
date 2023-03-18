@@ -1,1 +1,47 @@
 
+
+
+.add{
+    margin-left: 86%;
+    margin-bottom:20px;
+    margin-top:20px;
+   
+}
+
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  img {
+    border-radius:50%;
+  }
+  
+  .left-container {
+    display: flex;
+    align-items: center;
+  }
+  .details {
+    margin-left: 40px;
+  }
+
+  .right-container {
+    display: flex;
+
+  }
+  
+  .icons {
+    display: flex;
+    position: absolute;
+    margin-top:20px;
+    margin-right:30px;
+    top: 0;
+    right: 0;
+  }
+ .pen{
+    margin-right:30px;
+ }
+  
+ 

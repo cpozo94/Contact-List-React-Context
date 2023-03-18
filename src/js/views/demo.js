@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTasks, faPen,faEnvelope, faTrash, faMobilePhone, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import { Context } from "../store/appContext";
 
@@ -7,30 +9,48 @@ import "../../styles/demo.css";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
-	
+	console.log("store",store)
 
 	return (
 		<div className="container">
+			<div className="add">
 			<Link to="/todo">
 			<a className="btn btn-success" id="contact">
 				Add new contact
 			</a>
 			</Link>
-
-		
+			</div>
 		
 			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li key={index} className="list-group-item">
+  				{store.demo.map((item, index) => {
+    			return (
+					<li key={index} className="list-group-item">
+					<div className="left-container">
+					  <div className="imagen">
+						<img src={`https://randomuser.me/api/portraits/men/${index+1}.jpg`} alt="Profile" />
+					  </div>
+					  <div className="details">
 						<h5>{item.full_name}</h5>
-						<p>Email: {item.email}</p>
-						<p>Phone: {item.phone}</p>
-						<p>Address: {item.address}</p>
-					</li>
-					);
-				})}
-			</ul>
+						<p><FontAwesomeIcon icon={faEnvelope}/> Email: {item.email}</p>
+						<p><FontAwesomeIcon icon={faMobilePhone}/> Phone: {item.phone}</p>
+						<p><FontAwesomeIcon icon={faLocationDot}/> Address: {item.address}</p>
+					  </div>
+					</div>
+					<div className="right-container">
+					  <div className="icons">
+						<div className="pen">
+						<FontAwesomeIcon icon={faPen}/>
+						</div>
+						<div>
+						<FontAwesomeIcon icon={faTrash}/>
+						</div>
+					  </div>
+					</div>
+				  </li>
+    );
+  })}
+</ul>
+
 			
 		</div>
 	);

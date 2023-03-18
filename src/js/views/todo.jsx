@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/todo.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
+
 
 const Todo = () => {
     console.log("hola")
@@ -11,6 +14,7 @@ const Todo = () => {
         <div className="mb-3">
         <label for="exampleFormControlInput1" className="form-label">Full name</label>
         <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Full name"/>
+        
         </div>
         <div className="mb-3">
         <label for="exampleFormControlInput1" className="form-label">Email</label>
