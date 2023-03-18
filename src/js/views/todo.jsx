@@ -7,11 +7,13 @@ import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 
 //problema que tengo, cómo defino de manera dinámica el campo agenda_slug sin tener que poner un valor determinado para crear el usuario.
+//defino uno, y todos los nuevos usuarios los tengo controlados.
+
 const Todo = () => {
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
-    agenda_slug: "felipe",
+    agenda_slug: "practica",
     phone: "",
     address: "",
   });
@@ -35,13 +37,19 @@ const Todo = () => {
       });
       const data = await response.json();
       console.log(data);
+      setFormData({
+        full_name: "",
+        email: "",
+        agenda_slug: "practica",
+        phone: "",
+        address: "",
+      });
     } catch (err) {
       console.log(err);
     }
   };
 
-
-
+ 
   return (
     <div className="container">
       <div>
@@ -115,5 +123,7 @@ const Todo = () => {
     </div>
   );
 };
+
+//se puede hacer que cuando le de a save, vuelva al a página principal? lo he probado y no me da resultado cuando he añadido Link
 
 export default Todo;

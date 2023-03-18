@@ -1,4 +1,4 @@
-const URL = "https://assets.breatheco.de/apis/fake/contact/agenda/carlos"
+const URL = "https://assets.breatheco.de/apis/fake/contact/agenda/practica"
 
 async function getData() {
     const response = await fetch(URL, {method:"GET"})
@@ -22,4 +22,17 @@ export const newUser = async (contactos) => {
         console.log("error",err)
     }
 
+}
+
+export const deleteUser = async (userId) => {
+    try {
+        const res = await fetch(URL/`${userId}`, {
+            method: "DELETE",
+            headers: HEADERS,
+        });
+        return res;
+    } catch (err) {
+        console.log("error", err);
+        return null;
+    }
 }
