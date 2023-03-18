@@ -8,4 +8,18 @@ async function getData() {
 }
 
 
+
+
 export default getData;
+
+export const newUser = async (contactos) => {
+    try {
+        const res = await fetch (URL, {method: "POST",
+        body:JSON.stringify(contactos), 
+        headers: HEADERS})
+
+    }catch (err){
+        console.log("error",err)
+    }
+
+}

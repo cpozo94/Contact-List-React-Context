@@ -1,50 +1,119 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/todo.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 
+
+//problema que tengo, cómo defino de manera dinámica el campo agenda_slug sin tener que poner un valor determinado para crear el usuario.
 const Todo = () => {
-    console.log("hola")
-    return (
-        <div className="container">
-          <div>
-            <h1>Add new contact</h1>
-            <div className="mb-3">
-              <label htmlFor="exampleFormControlInput1" className="form-label">Full name</label>
-              <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Full name" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleFormControlInput2" className="form-label">Email</label>
-              <input type="email" className="form-control" id="exampleFormControlInput2" placeholder="Enter email" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleFormControlInput3" className="form-label">Phone</label>
-              <input type="number" className="form-control" id="exampleFormControlInput3" placeholder="Enter phone" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleFormControlInput4" className="form-label">Address</label>
-              <input type="text" className="form-control" id="exampleFormControlInput4" placeholder="Enter address" />
-            </div>
-            <div className="mb-3">
-              <button type="button" className="btn btn-primary w-100">Save</button>
-            </div>
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email: "",
+    agenda_slug: "felipe",
+    phone: "",
+    address: "",
+  });
+
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
       
-            <Link to="/">
-              or get back to contacts
-            </Link>
+    });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch("https://assets.breatheco.de/apis/fake/contact/", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
+  return (
+    <div className="container">
+      <div>
+        <h1>Add new contact</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="full_name" className="form-label">
+              Full name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="full_name"
+              placeholder="Full name"
+              value={formData.full_name}
+              onChange={handleInputChange}
+            />
           </div>
-        </div>
-      );
-      
-   
-}
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              placeholder="Enter email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label">
+              Phone
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="phone"
+              name="phone"
+              placeholder="Enter phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="address" className="form-label">
+              Address
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="address"
+              name="address"
+              placeholder="Enter address"
+              value={formData.address}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-3">
+            <button type="submit" className="btn btn-primary w-100">
+              Save
+            </button>
+          </div>
+        </form>
 
+        <Link to="/">or get back to contacts</Link>
+      </div>
+    </div>
+  );
+};
 
-
-
-
-
-export default Todo
-
+export default Todo;

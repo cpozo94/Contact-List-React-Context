@@ -46,7 +46,9 @@ export const Demo = () => {
 								<FontAwesomeIcon icon={faPen}/>
 								</div>
 								<div>
-								<FontAwesomeIcon icon={faTrash}/>
+								<FontAwesomeIcon icon={faTrash} onClick={() =>
+  									store.contacts.splice(index, 1)
+								} />
 								</div>
 							  </div>
 							</div>
