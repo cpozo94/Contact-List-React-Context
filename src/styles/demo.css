@@ -39,6 +39,7 @@
     margin-right:30px;
     top: 0;
     right: 0;
+
   }
  .pen{
     margin-right:30px;
@@ -49,6 +50,11 @@
   margin:auto;
   margin-right: 20px;
  }
+
+.pen{
+  color: black;
+  margin-top: 4px;
+}
  
   
  
