@@ -10,6 +10,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Todo from "./views/todo.jsx";
+import { EditUser } from "./views/edit.jsx";
 
 //create your first component
 const Layout = () => {
@@ -25,7 +26,7 @@ const Layout = () => {
 					<Routes>
 						<Route path="/" element={<Demo />} />
 						<Route path="/todo" element={<Todo />} />
-						<Route path="/single/:theid" element={<Single />} />
+						<Route path="/edit" element={<EditUser />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 					<Footer />
