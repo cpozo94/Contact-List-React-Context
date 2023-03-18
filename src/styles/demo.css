@@ -1,12 +1,13 @@
 
 
-
-.add{
-    margin-left: 86%;
-    margin-bottom:20px;
-    margin-top:20px;
-   
+.add {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
+
+
 
 
 .list-group-item {
