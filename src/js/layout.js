@@ -9,7 +9,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import Todo from "./views/todo.jsx";
+import Todo from "./views/newUser.jsx";
 import { EditUser } from "./views/edit.jsx";
 
 //create your first component

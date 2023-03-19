@@ -1,5 +1,5 @@
-import getData from "../views/prueba.jsx";
-import { deleteUser } from "../views/prueba.jsx";
+import getData from "../views/home.jsx";
+import { deleteUser } from "../views/home.jsx";
 
 
 
@@ -23,9 +23,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error(error);
 				}
 			},
-			deleteContacts:async (userId)=> {
+			deleteContacts:async (name)=> {
 				try{
-					const response = await deleteUser(userId);
+					const response = await deleteUser(name);
 					setStore({contacts: response});
 
 				} catch (error) {

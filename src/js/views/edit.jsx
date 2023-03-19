@@ -10,44 +10,44 @@ import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 //defino uno, y todos los nuevos usuarios los tengo controlados.
 
 export const EditUser = () => {
-//   const [formData, setFormData] = useState({
-//     full_name: "",
-//     email: "",
-//     agenda_slug: "practica",
-//     phone: "",
-//     address: "",
-//   });
+ const [formData, setFormData] = useState({
+   full_name: "",   
+   email: "",
+   agenda_slug: "practica",
+  phone: "",
+  address: "",
+  });
 
-//   const handleInputChange = (event) => {
-//     setFormData({
-//       ...formData,
-//       [event.target.name]: event.target.value,
-      
-//     });
-//   };
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     try {
-//       const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${contactId}`, {
-//         method: "PUT",
-//         body: JSON.stringify(formData),
-//         headers: {
-//           "Content-Type": "application/json"
-//         }
-//       });
-//       const data = await response.json();
-//       console.log(data);
-//       setFormData({
-//         full_name: data.full_name,
-//         email: data.email,
-//         agenda_slug: data.agenda_slug,
-//         phone: data.phone,
-//         address: data.address,
-//       });
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+           });
+  };   
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${contactId}`, {
+         method: "PUT",
+         body: JSON.stringify(formData),
+        headers: {
+           "Content-Type": "application/json"
+         }
+       });
+       const data = await response.json();
+       console.log(data);
+       setFormData({
+         full_name: data.full_name,
+         email: data.email,
+         agenda_slug: data.agenda_slug,
+         phone: data.phone,
+         address: data.address,
+       });
+     } catch (err) {
+       console.log(err);
+     }
+   };
   
 
  

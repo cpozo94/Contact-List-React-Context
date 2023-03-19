@@ -24,9 +24,9 @@ export const newUser = async (contactos) => {
 
 }
 
-export const deleteUser = async (userId) => {
+export const deleteUser = async (name) => {
     try {
-        const res = await fetch(URL/`${userId}`, {
+        const res = await fetch(URL/`${name}`, {
             method: "DELETE",
             headers: HEADERS,
         });

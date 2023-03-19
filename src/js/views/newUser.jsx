@@ -25,6 +25,9 @@ const Todo = () => {
       
     });
   };
+
+
+  //evito que se recargue la página y justo despues de "response.json" el campo debe volver a valores iniciales vacíos.
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -124,6 +127,5 @@ const Todo = () => {
   );
 };
 
-//se puede hacer que cuando le de a save, vuelva al a página principal? lo he probado y no me da resultado cuando he añadido Link
 
 export default Todo;
