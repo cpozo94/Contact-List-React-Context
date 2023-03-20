@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks, faPen,faEnvelope, faTrash, faMobilePhone, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import getData from "./home.jsx";
+import { useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -12,6 +13,7 @@ import "../../styles/demo.css";
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
 	const [state,setState] = useState(store)
+	const navigate = useNavigate();
 	
 //cada vez que carga la página, llamo a actions.fetchContacts() que a su vez hace un fetch "GET" (home.jsx)
 //para que haga una llamada a la API y ver los contactos que tengo.
@@ -28,6 +30,14 @@ const deleteUSer = async (id) => {
     setStore({ contacts: newContacts });
    
 };
+
+const editContact = (contact) =>{
+ actions.editContact(contact);
+ navigate("/edit")
+ 
+
+
+}
 
 	//tengo establecido el map, unido al store contacts, en función de los contacts que tenga añadidos
 	//generará X elementos, sotre estaría en flux.js
@@ -66,7 +76,7 @@ const deleteUSer = async (id) => {
 							  <Link to="/edit">
 
 								<div className="pen">
-								<FontAwesomeIcon icon={faPen} />
+								<FontAwesomeIcon icon={faPen} onClick={()=> editContact(item)}/>
 								</div>
 								</Link>
 								<div>

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React,  { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/todo.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { Context } from "../store/appContext";
+
 
 
 
@@ -10,13 +12,11 @@ import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 //defino uno, y todos los nuevos usuarios los tengo controlados.
 
 export const EditUser = () => {
- const [formData, setFormData] = useState({
-   full_name: "",   
-   email: "",
-   agenda_slug: "practica",
-  phone: "",
-  address: "",
-  });
+  const { store, actions } = useContext(Context);
+ const [formData, setFormData] = useState(store.contact);
+ const navigate = useNavigate();
+	
+ console.log(store)
 
   const handleInputChange = (event) => {
     setFormData({
@@ -28,7 +28,7 @@ export const EditUser = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${contactId}`, {
+      const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${formData.id}`, {
          method: "PUT",
          body: JSON.stringify(formData),
         headers: {
@@ -37,25 +37,19 @@ export const EditUser = () => {
        });
        const data = await response.json();
        console.log(data);
-       setFormData({
-         full_name: data.full_name,
-         email: data.email,
-         agenda_slug: data.agenda_slug,
-         phone: data.phone,
-         address: data.address,
-       });
      } catch (err) {
        console.log(err);
      }
+     navigate("/")
    };
   
-
+console.log(formData);
  
   return (
     <div className="container">
       <div>
         <h1>Edit Contact</h1>
-        <form >
+        <form onChange={handleInputChange}>
           <div className="mb-3">
             <label htmlFor="full_name" className="form-label">
               Full name
@@ -66,6 +60,8 @@ export const EditUser = () => {
               id="name"
               name="full_name"
               placeholder="Full name"
+              defaultValue={formData.full_name}
+              
               
               
             />
@@ -80,6 +76,7 @@ export const EditUser = () => {
               id="email"
               name="email"
               placeholder="Enter email"
+              defaultValue={formData.email}
              
              
             />
@@ -94,6 +91,7 @@ export const EditUser = () => {
               id="phone"
               name="phone"
               placeholder="Enter phone"
+              defaultValue={formData.phone}
              
               
             />
@@ -108,12 +106,13 @@ export const EditUser = () => {
               id="address"
               name="address"
               placeholder="Enter address"
+              defaultValue={formData.email}
               
               
             />
           </div>
           <div className="mb-3">
-            <button type="submit" className="btn btn-primary w-100">
+            <button type="submit" className="btn btn-primary w-100" onClick={handleSubmit}>
               Save
             </button>
           </div>

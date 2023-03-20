@@ -10,7 +10,8 @@ import { deleteUser } from "../views/home.jsx";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: []
+			contacts: [],
+			contact: {},
 		},
 
 		//incluir en action tb la cancelación.
@@ -22,6 +23,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error(error);
 				}
+			},
+			editContact: (contact) => {
+				const store = getStore();
+				setStore({...store, contact})
+
 			},
 			deleteContacts:async (name)=> {
 				try{

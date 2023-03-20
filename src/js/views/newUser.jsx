@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../styles/todo.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -10,6 +11,7 @@ import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 //defino uno, y todos los nuevos usuarios los tengo controlados.
 
 const Todo = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
@@ -50,6 +52,7 @@ const Todo = () => {
     } catch (err) {
       console.log(err);
     }
+    navigate("/");
   };
 
  
