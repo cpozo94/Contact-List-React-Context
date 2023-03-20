@@ -31,6 +31,8 @@ const deleteUSer = async (id) => {
    
 };
 
+//al hacer click en el lapiz, llamo al action del edit contact para llamar al usuario que acabo de crear.
+//actions.editContact lo tengo en flux.js, 
 const editContact = (contact) =>{
  actions.editContact(contact);
  navigate("/edit")

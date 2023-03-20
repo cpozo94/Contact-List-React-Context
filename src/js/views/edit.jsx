@@ -8,8 +8,7 @@ import { Context } from "../store/appContext";
 
 
 
-//problema que tengo, cómo defino de manera dinámica el campo agenda_slug sin tener que poner un valor determinado para crear el usuario.
-//defino uno, y todos los nuevos usuarios los tengo controlados.
+
 
 export const EditUser = () => {
   const { store, actions } = useContext(Context);
@@ -18,6 +17,7 @@ export const EditUser = () => {
 	
  console.log(store)
 
+ //seteo my nuevo formData con la info que el usuario mete en el input.
   const handleInputChange = (event) => {
     setFormData({
       ...formData,
@@ -25,6 +25,8 @@ export const EditUser = () => {
            });
   };   
   
+
+  //formData.id proque es como viene definido en la API que tengo que acceder al usuario.
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -43,7 +45,7 @@ export const EditUser = () => {
      navigate("/")
    };
   
-console.log(formData);
+
  
   return (
     <div className="container">
