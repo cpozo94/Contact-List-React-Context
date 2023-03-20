@@ -45,7 +45,7 @@ export const EditUser = () => {
      navigate("/")
    };
   
-
+//default value, me pone el formData.(elemento) que tengo, los elementos los tengo en el demo.js
  
   return (
     <div className="container">
@@ -63,9 +63,6 @@ export const EditUser = () => {
               name="full_name"
               placeholder="Full name"
               defaultValue={formData.full_name}
-              
-              
-              
             />
           </div>
           <div className="mb-3">
@@ -79,9 +76,8 @@ export const EditUser = () => {
               name="email"
               placeholder="Enter email"
               defaultValue={formData.email}
-             
-             
             />
+
           </div>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label">
@@ -94,9 +90,8 @@ export const EditUser = () => {
               name="phone"
               placeholder="Enter phone"
               defaultValue={formData.phone}
-             
-              
             />
+
           </div>
           <div className="mb-3">
             <label htmlFor="address" className="form-label">
@@ -109,8 +104,7 @@ export const EditUser = () => {
               name="address"
               placeholder="Enter address"
               defaultValue={formData.email}
-              
-              
+      
             />
           </div>
           <div className="mb-3">
@@ -126,6 +120,5 @@ export const EditUser = () => {
   );
 };
 
-//se puede hacer que cuando le de a save, vuelva al a página principal? lo he probado y no me da resultado cuando he añadido Link
 
 export default EditUser;
