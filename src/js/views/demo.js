@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks, faPen,faEnvelope, faTrash, faMobilePhone, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import getData from "./home.jsx";
 import { useNavigate } from "react-router-dom";
+import { deleteUser } from "./home.jsx";
 
 import { Context } from "../store/appContext";
 
@@ -12,7 +13,7 @@ import "../../styles/demo.css";
 //defino el usteState(store) que se encuentra en flux, dentro estarían los contacts: []
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
-	const [state,setState] = useState(store)
+	const [state,setState] = useState(store);
 	const navigate = useNavigate();
 	
 //cada vez que carga la página, llamo a actions.fetchContacts() que a su vez hace un fetch "GET" (home.jsx)
@@ -24,19 +25,20 @@ export const Demo = () => {
 
 //lo tengo pendiente de ver.
 
-const deleteUSer = async (id) => {
-    await actions.deleteContacts(id);
-    const newContacts = store.contacts.filter(contact => contact.id !== id);
-    setStore({ contacts: newContacts });
-   
-};
+
+const deleteContact = (ids, index) => {
+	const id = ids[index];
+	deleteUser(id);
+	actions.fetchContacts();
+	console.log(id);
+  };
+
 
 //al hacer click en el lapiz, llamo al action del edit contact para llamar al usuario que acabo de crear.
 //actions.editContact lo tengo en flux.js, 
 const editContact = (contact) =>{
  actions.editContact(contact);
  navigate("/edit")
- 
 
 
 }
@@ -100,7 +102,7 @@ const editContact = (contact) =>{
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-primary" data-bs-dismiss="modal">Oh no!</button>
-								<button type="button" className="btn btn-secondary" onClick={()=> deleteUSer() }>Yes baby!</button>
+								<button type="button" className="btn btn-secondary" onClick={() => console.log(item.id, index)}>Yes baby!</button>
 							</div>
 							</div>
 						</div>

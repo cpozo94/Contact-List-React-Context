@@ -29,15 +29,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({...store, contact})
 
 			},
-			deleteContacts:async (name)=> {
-				try{
-					const response = await deleteUser(name);
-					setStore({contacts: response});
-
-				} catch (error) {
-					console.error(error)
-				}
-			}
 		}
 	};
 };

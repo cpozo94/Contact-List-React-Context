@@ -1,4 +1,10 @@
+
+
 const URL = "https://assets.breatheco.de/apis/fake/contact/agenda/practica"
+const URLde ="https://assets.breatheco.de/apis/fake/contact"
+const HEADERS = {
+    "Content-Type": "application/json"
+};
 
 async function getData() {
     const response = await fetch(URL, {method:"GET"})
@@ -24,15 +30,19 @@ export const newUser = async (contactos) => {
 
 }
 
+
 export const deleteUser = async (name) => {
     try {
-        const res = await fetch(URL/`${name}`, {
-            method: "DELETE",
-            headers: HEADERS,
-        });
-        return res;
+      const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${name}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      return data;
     } catch (err) {
-        console.log("error", err);
-        return null;
+      console.log("Error:", err);
+      return null;
     }
-}
+  };
