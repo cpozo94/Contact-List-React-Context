@@ -26,14 +26,15 @@ export const Demo = () => {
 //lo tengo pendiente de ver.
 
 
-const deleteContact = (ids, index) => {
-	const id = ids[index];
-	deleteUser(id);
-	actions.fetchContacts();
-	console.log(id);
-  };
-
-
+const deleteContact = async (id) => {
+	try {
+		await deleteUser(id);
+		actions.fetchContacts();
+		console.log(id);
+	} catch (error) {
+		console.log(error);
+	}
+};
 //al hacer click en el lapiz, llamo al action del edit contact para llamar al usuario que acabo de crear.
 //actions.editContact lo tengo en flux.js, 
 const editContact = (contact) =>{
@@ -102,7 +103,7 @@ const editContact = (contact) =>{
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-primary" data-bs-dismiss="modal">Oh no!</button>
-								<button type="button" className="btn btn-secondary" onClick={() => console.log(item.id, index)}>Yes baby!</button>
+								<button type="button" className="btn btn-secondary" onClick={() => deleteContact(item.id)}>Yes baby!</button>
 							</div>
 							</div>
 						</div>
