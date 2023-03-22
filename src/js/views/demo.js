@@ -87,7 +87,7 @@ const editContact = (contact) =>{
 								<div>
 								
 				<button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				<FontAwesomeIcon icon={faTrash}/>
+				<FontAwesomeIcon icon={faTrash} onClick={() => deleteContact(item.id)} />
 				</button>
 
 
