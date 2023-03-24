@@ -1,5 +1,5 @@
 import getData from "../views/home.jsx";
-import { deleteUser } from "../views/home.jsx";
+
 
 
 
@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			contact: {},
 		},
 
-		//incluir en action tb la cancelación.
+		
 		actions: {
 			fetchContacts: async () => {
 				try {

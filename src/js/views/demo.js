@@ -15,6 +15,7 @@ export const Demo = () => {
 	const { store, actions } = useContext(Context);
 	const [state,setState] = useState(store);
 	const navigate = useNavigate();
+	const [contactToDelete, setContactToDelete] = useState(null);
 	
 //cada vez que carga la página, llamo a actions.fetchContacts() que a su vez hace un fetch "GET" (home.jsx)
 //para que haga una llamada a la API y ver los contactos que tengo.
@@ -23,24 +24,27 @@ export const Demo = () => {
 		actions.fetchContacts();
 	}, []);
 
-//lo tengo pendiente de ver.
-
 
 const deleteContact = async (id) => {
 	try {
 		await deleteUser(id);
 		actions.fetchContacts();
-		console.log(id);
+		getData();
 	} catch (error) {
 		console.log(error);
 	}
+
 };
+
+const handleOpenModal = (id) => {
+	setContactToDelete(id);
+};
+
 //al hacer click en el lapiz, llamo al action del edit contact para llamar al usuario que acabo de crear.
 //actions.editContact lo tengo en flux.js, 
 const editContact = (contact) =>{
  actions.editContact(contact);
  navigate("/edit")
-
 
 }
 
@@ -86,8 +90,8 @@ const editContact = (contact) =>{
 								</Link>
 								<div>
 								
-				<button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				<FontAwesomeIcon icon={faTrash} onClick={() => deleteContact(item.id)} />
+				<button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => handleOpenModal(item.id)}>
+				<FontAwesomeIcon icon={faTrash}/>
 				</button>
 
 
@@ -103,7 +107,9 @@ const editContact = (contact) =>{
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-primary" data-bs-dismiss="modal">Oh no!</button>
-								<button type="button" className="btn btn-secondary" onClick={() => deleteContact(item.id)}>Yes baby!</button>
+								<Link to="/">
+								<button type="button" className="btn btn-secondary" onClick={() => deleteContact(contactToDelete)}>Yes baby!</button>
+								</Link>
 							</div>
 							</div>
 						</div>
