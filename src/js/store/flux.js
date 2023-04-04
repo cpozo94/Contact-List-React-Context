@@ -1,4 +1,4 @@
-import getData from "../views/home.jsx";
+import getData from "../views/services.jsx";
 
 
 

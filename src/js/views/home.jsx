@@ -1,48 +1,130 @@
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTasks, faPen,faEnvelope, faTrash, faMobilePhone, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import getData from "./services.jsx";
+import { useNavigate } from "react-router-dom";
+import { deleteUser } from "./services.jsx";
+
+import { Context } from "../store/appContext.js";
+
+import "../../styles/demo.css";
+
+//defino el usteState(store) que se encuentra en flux, dentro estarían los contacts: []
+export const Demo = () => {
+	const { store, actions } = useContext(Context);
+	const [state,setState] = useState(store);
+	const navigate = useNavigate();
+	const [contactToDelete, setContactToDelete] = useState(null);
+	const [Isloading, setIsLoading] = useState(false);
+	
+//cada vez que carga la página, llamo a actions.fetchContacts() que a su vez hace un fetch "GET" (home.jsx)
+//para que haga una llamada a la API y ver los contactos que tengo.
+
+	useEffect(() => {
+		actions.fetchContacts();
+	}, []);
 
 
-const URL = "https://assets.breatheco.de/apis/fake/contact/agenda/practica"
-const URLde ="https://assets.breatheco.de/apis/fake/contact"
-const HEADERS = {
-    "Content-Type": "application/json"
+const deleteContact = async (id) => {
+	try {
+		setIsLoading(true); // Start loading spinner
+		await deleteUser(id);
+		actions.fetchContacts();
+		getData();
+		setIsLoading(false); // Stop loading spinner
+		setContactToDelete(null); // Close modal
+		} catch (error) {
+		  console.log(error);
+		}
+	  };
+
+const handleOpenModal = (id) => {
+	setContactToDelete(id);
 };
 
-async function getData() {
-    const response = await fetch(URL, {method:"GET"})
-    const dataResponse = await response.json();
-    console.log(dataResponse)
-    return dataResponse
-}
-
-
-
-
-export default getData;
-
-export const newUser = async (contactos) => {
-    try {
-        const res = await fetch (URL, {method: "POST",
-        body:JSON.stringify(contactos), 
-        headers: HEADERS})
-
-    }catch (err){
-        console.log("error",err)
-    }
+//al hacer click en el lapiz, llamo al action del edit contact para llamar al usuario que acabo de crear.
+//actions.editContact lo tengo en flux.js, 
+const editContact = (contact) =>{
+ actions.editContact(contact);
+ navigate("/edit")
 
 }
 
+	//tengo establecido el map, unido al store contacts, en función de los contacts que tenga añadidos
+	//generará X elementos, sotre estaría en flux.js
+	//dentro de cada elemento lo hemos vinculado al item en questión y hemos obtenido 
+	//lo que queremos, email,phone y adress en este caso.
 
-export const deleteUser = async (name) => {
-    try {
-      const response = await fetch(`https://assets.breatheco.de/apis/fake/contact/${name}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      console.log("Error:", err);
-      return null;
-    }
-  };
+	return (
+
+
+		<div className="container">
+			<div className="add">
+				<Link to="/todo">
+					<button className="btn btn-success" id="contact">
+						Add new contact
+					</button>
+				</Link>
+			</div>
+		
+			<ul className="list-group">
+  				{store.contacts.map((item, index) => {
+	    			return (
+						<li key={index} className="list-group-item">
+							<div className="left-container">
+							  <div className="imagen">
+								<img src={`https://randomuser.me/api/portraits/men/${index+1}.jpg`} alt="Profile" />
+							  </div>
+							  <div className="details">
+								<h5>{item.full_name}</h5>
+								<p><FontAwesomeIcon icon={faEnvelope}/> Email: {item.email}</p>
+								<p><FontAwesomeIcon icon={faMobilePhone}/> Phone: {item.phone}</p>
+								<p><FontAwesomeIcon icon={faLocationDot}/> Address: {item.address}</p>
+							  </div>
+							</div>
+							<div className="right-container">
+							  <div className="icons">
+							  <Link to="/edit">
+
+								<div className="pen">
+								<FontAwesomeIcon icon={faPen} onClick={()=> editContact(item)}/>
+								</div>
+								</Link>
+								<div>
+								
+				<button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => handleOpenModal(item.id)}>
+				<FontAwesomeIcon icon={faTrash}/>
+				</button>
+
+
+						<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div className="modal-dialog">
+							<div className="modal-content">
+							<div className="modal-header">
+								<h1 className="modal-title fs-5" id="modal_title">Are you sure?</h1>
+								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div className="modal-body">
+								If you delete this thing the entire universe will go down!!
+							</div>
+							<div className="modal-footer">
+								<button type="button" className="btn btn-primary" data-bs-dismiss="modal">Oh no!</button>
+								<Link to="/">
+								<button type="button" className="btn btn-secondary" onClick={() => deleteContact(contactToDelete)} data-bs-dismiss="modal">Yes baby!</button>
+								</Link>
+							</div>
+							</div>
+						</div>
+						</div>
+								
+								</div>
+							  </div>
+							</div>
+						</li>
+	    			);
+  				})}
+			</ul>
+		</div>
+	);
+};
