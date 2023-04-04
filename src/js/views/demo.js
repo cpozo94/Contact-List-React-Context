@@ -108,7 +108,7 @@ const editContact = (contact) =>{
 							<div className="modal-footer">
 								<button type="button" className="btn btn-primary" data-bs-dismiss="modal">Oh no!</button>
 								<Link to="/">
-								<button type="button" className="btn btn-secondary" onClick={() => deleteContact(contactToDelete)}>Yes baby!</button>
+								<button type="button" className="btn btn-secondary" onClick={() => deleteContact(contactToDelete)} data-bs-dismiss="modal">Yes baby!</button>
 								</Link>
 							</div>
 							</div>

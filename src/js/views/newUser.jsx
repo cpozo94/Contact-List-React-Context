@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-//problema que tengo, cómo defino de manera dinámica el campo agenda_slug sin tener que poner un valor determinado para crear el usuario.
-//defino uno, y todos los nuevos usuarios los tengo controlados.
+
 
 const Todo = () => {
   const navigate = useNavigate();
