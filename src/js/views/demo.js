@@ -16,6 +16,7 @@ export const Demo = () => {
 	const [state,setState] = useState(store);
 	const navigate = useNavigate();
 	const [contactToDelete, setContactToDelete] = useState(null);
+	const [Isloading, setIsLoading] = useState(false);
 	
 //cada vez que carga la página, llamo a actions.fetchContacts() que a su vez hace un fetch "GET" (home.jsx)
 //para que haga una llamada a la API y ver los contactos que tengo.
@@ -27,14 +28,16 @@ export const Demo = () => {
 
 const deleteContact = async (id) => {
 	try {
+		setIsLoading(true); // Start loading spinner
 		await deleteUser(id);
 		actions.fetchContacts();
 		getData();
-	} catch (error) {
-		console.log(error);
-	}
-
-};
+		setIsLoading(false); // Stop loading spinner
+		setContactToDelete(null); // Close modal
+		} catch (error) {
+		  console.log(error);
+		}
+	  };
 
 const handleOpenModal = (id) => {
 	setContactToDelete(id);
